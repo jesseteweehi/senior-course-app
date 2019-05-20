@@ -1,0 +1,72 @@
+<ul>
+    <li *ngFor="let item of items | async">
+      {{ item.title }}
+    </li>
+  </ul>
+
+
+<form novalidate [formGroup]="form">
+<div class="example-container">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="title" formControlName="title">
+  </mat-form-field>
+
+  <mat-form-field>
+      <mat-select formControlName="credits" placeholder="Credits">
+        <mat-option value="1">1</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="3">3</mat-option>
+        <mat-option value="4">4</mat-option>
+        <mat-option value="5">5</mat-option>
+        <mat-option value="6">6</mat-option>
+        <mat-option value="7">7</mat-option>
+        <mat-option value="8">8</mat-option>
+        <mat-option value="9">9</mat-option>
+        <mat-option value="10">10</mat-option>
+        <mat-option value="11">11</mat-option>
+        <mat-option value="12">12</mat-option>
+        <mat-option value="13">13</mat-option>
+        <mat-option value="14">14</mat-option>
+      </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+      <mat-select formControlName="standardtype" placeholder="Standard Type">
+        <mat-option value="Achievement">Achievement</mat-option>
+        <mat-option value="Unit">Unit</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  <mat-form-field>
+      <mat-select formControlName="assessmenttype" placeholder="Assessment Type">
+        <mat-option value="Internal">Internal</mat-option>
+        <mat-option value="External">External</mat-option>
+      </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+      <input matInput placeholder="Domain" formControlName="domain">
+  </mat-form-field>
+
+  <mat-form-field>
+      <input matInput placeholder="Subfield" formControlName="subfield">
+  </mat-form-field>
+
+  <mat-form-field>
+      <mat-select formControlName="level" placeholder="Assessment level">
+        <mat-option value="1">1</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="3">3</mat-option>
+      </mat-select>
+  </mat-form-field>
+ 
+
+
+</div>
+<button mat-button (click)="save()" color="primary">Save</button>
+
+</form>
+
+
+
+  
