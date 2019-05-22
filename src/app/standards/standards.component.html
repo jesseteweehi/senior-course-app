@@ -1,6 +1,6 @@
 <ul>
-    <li *ngFor="let item of items | async">
-      {{ item.title }}
+    <li *ngFor="let item of standards | async">
+      {{ standard.title }}
     </li>
   </ul>
 
@@ -8,7 +8,18 @@
 <form novalidate [formGroup]="form">
 <div class="example-container">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="title" formControlName="title">
+    <input matInput placeholder="Title" formControlName="title">
+  </mat-form-field>
+
+  <mat-form-field>
+      <mat-select formControlName="literacy_numeracy" placeholder="Literacy / Numeracy">
+        <mat-option value="L1 Literacy">L1 Literacy</mat-option>
+        <mat-option value="L1 Numeracy">L1 Numeracy</mat-option>
+        <mat-option value="L1 Literacy and Numeracy">L1 Literacy and Numeracy</mat-option>
+        <mat-option value="Reading Literacy">Reading Literacy</mat-option>
+        <mat-option value="Writing Literacy">Writing Literacy</mat-option>
+        <mat-option value="Writing Literacy and Reading Literacy">Writing Literacy and Reading Literacy</mat-option>
+      </mat-select>
   </mat-form-field>
 
   <mat-form-field>

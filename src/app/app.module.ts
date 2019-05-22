@@ -11,10 +11,15 @@ import {MatMenuModule,
         MatButtonModule,
         MatInputModule,
         MatSelectModule,
-        MatSliderModule} from '@angular/material';
+        MatSliderModule,
+        MatCheckboxModule,
+        MatSlideToggleModule,
+        MatCardModule,
+      } from '@angular/material';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { CoursesComponent } from './courses/courses.component';
 
 
 
@@ -24,6 +29,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
   declarations: [
     AppComponent,
     StandardsComponent,
+    CoursesComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -38,6 +44,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     MatInputModule,
     MatSelectModule,
     MatSliderModule,
+    MatCheckboxModule,
+    MatSlideToggleModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
