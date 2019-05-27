@@ -2,18 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Course } from './../global/classes';
+import { map } from 'rxjs/operators';
 
-export interface Course {
-  date_created: string;
-  date_updated: string;
-  title: string;
-  year_level: string;
-  subject_code: string;
-  teacher_in_charge: string;
-  course_endorsable: string;
-  course_information: string;
-  faculty: string;
-}
 
 @Component({
   selector: 'app-courses',
@@ -21,16 +12,22 @@ export interface Course {
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
-  private coursesCollection: AngularFirestoreCollection<Course>;
-  courses: Observable<Course[]>;
+  coursesCollectionRef: AngularFirestoreCollection<Course>;
+  course$: Observable<Course[]>;
 
   form: FormGroup;
+
 
   constructor(private fb: FormBuilder,
               private afs: AngularFirestore
               ) {
-                this.coursesCollection = afs.collection<Course>('course');
-                this.courses = this.coursesCollection.valueChanges();
+                this.coursesCollectionRef = afs.collection<Course>('course');
+                this.course$ = this.coursesCollectionRef.snapshotChanges().pipe(
+                  map(actions => actions.map(a => {
+                    const data = a.payload.doc.data() as Course;
+                    const id = a.payload.doc.id;
+                    return{id, ...data};
+                  })));
               }
 
   ngOnInit() {

@@ -20,35 +20,39 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { CoursesComponent } from './courses/courses.component';
+import { CoursesListComponent } from './courses-list/courses-list.component';
 
 
 
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    StandardsComponent,
-    CoursesComponent,
-  ],
-  imports: [
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatInputModule,
-    MatSelectModule,
-    MatSliderModule,
-    MatCheckboxModule,
-    MatSlideToggleModule,
-    MatCardModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+      StandardsComponent,
+      CoursesComponent,
+      CoursesListComponent
+   ],
+   imports: [
+      AngularFireModule.initializeApp(environment.firebase),
+      AngularFirestoreModule,
+      BrowserAnimationsModule,
+      BrowserModule,
+      ReactiveFormsModule,
+      AppRoutingModule,
+      MatMenuModule,
+      MatToolbarModule,
+      MatButtonModule,
+      MatInputModule,
+      MatSelectModule,
+      MatSliderModule,
+      MatCheckboxModule,
+      MatSlideToggleModule,
+      MatCardModule
+   ],
+   providers: [],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule { }
