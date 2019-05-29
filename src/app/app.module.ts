@@ -21,6 +21,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { CoursesComponent } from './courses/courses.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
+import { CoursesService } from './courses.service';
 
 
 
@@ -50,7 +51,9 @@ import { CoursesListComponent } from './courses-list/courses-list.component';
       MatSlideToggleModule,
       MatCardModule
    ],
-   providers: [],
+   providers: [
+      CoursesService
+   ],
    bootstrap: [
       AppComponent
    ]

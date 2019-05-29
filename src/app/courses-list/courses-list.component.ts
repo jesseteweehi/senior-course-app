@@ -4,6 +4,8 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Course } from './../global/classes';
+import { CoursesService } from './../courses.service';
+
 
 
 @Component({
@@ -12,23 +14,23 @@ import { Course } from './../global/classes';
   styleUrls: ['./courses-list.component.css']
 })
 export class CoursesListComponent implements OnInit {
-  courseid: string;
   private courseDoc: AngularFirestoreDocument<Course>;
-  course: Observable<Course>;
+  course$: Observable<any>;
 
 
 
   constructor(
     private afs: AngularFirestore,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cs: CoursesService
     ) {
-      this.courseid = this.route.snapshot.params.courseid;
-      this.courseDoc = this.afs.doc<Course>(`course/${this.courseid}`);
-      this.course = this.courseDoc.valueChanges();
+      const courseid = this.route.snapshot.params.courseid;
+      this.course$ = this.cs.readdoc$('course', courseid);
+      // this.courseDoc = this.afs.doc<Course>(`course/${this.courseid}`);
+      // this.course = this.courseDoc.valueChanges();
     }
 
   ngOnInit() {
-   
   }
 
 }

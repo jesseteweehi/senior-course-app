@@ -52,7 +52,7 @@ export class CoursesComponent implements OnInit {
 
   addItem(item: Course) {
     console.log(item);
-    this.coursesCollection.add(item);
+    this.coursesCollectionRef.add(item);
   }
 
 }
