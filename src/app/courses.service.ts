@@ -14,33 +14,35 @@ constructor(
   @Inject(AngularFirestore) protected afs: AngularFirestore,
 ) {}
 
-
-  readdoc$(path: string, id: string): Observable<any> {
-    console.log(path, id);
-    return this.afs.doc<any>(`${path}/${id}`).valueChanges();
-  }
-
-  readcollection$(path: string, id: string): Observable<any[]> {
-    return this.afs.collection<any>(`${path}/${id}`).valueChanges().pipe(
+  readdoc$(path: string, id: string): Observable<T> {
+    return this.afs.doc<T>(`${path}/${id}`).valueChanges().pipe(
       tap(r => {
-        if (!environment.production) {
-          console.groupCollapsed(`Firestore Streaming [${path}] [readcollection$] ${id}`);
-          console.log(r);
-          console.groupEnd();
+        console.groupCollapsed(`Firestore Streaming [${path}] [readcollection$] ${id}`);
+        console.log(r);
+        console.groupEnd();
         }
-      })
+      )
     );
   }
 
-  create(ref: AngularFirestoreCollection<any>, path: string, value: any) {
+  readcollection$(path: string): Observable<T[]> {
+    return this.afs.collection<T[]>(path).valueChanges().pipe(
+      tap(r => {
+          console.groupCollapsed(`Firestore Streaming [${path}] [readcollection$]`);
+          console.log(r);
+          console.groupEnd();
+        }
+      )
+    );
+  }
+
+  create(path: string, value: any) {
     const id = this.afs.createId();
-    return ref.doc(id).set(Object.assign({}, { id }, value)).then(_ => {
-        if (!environment.production) {
+    return this.afs.collection<T>(path).doc(id).set(Object.assign({}, { id }, value)).then(_ => {
             console.groupCollapsed(`Firestore Service [${path}] [create]`);
             console.log('[Id]', id, value);
             console.groupEnd();
-        }
-    });
+        });
   }
 
 }

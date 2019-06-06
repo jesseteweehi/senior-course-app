@@ -22,6 +22,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { CoursesComponent } from './courses/courses.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CoursesService } from './courses.service';
+import { StandardListComponent } from './standard-list/standard-list.component';
 
 
 
@@ -32,7 +33,8 @@ import { CoursesService } from './courses.service';
       AppComponent,
       StandardsComponent,
       CoursesComponent,
-      CoursesListComponent
+      CoursesListComponent,
+      StandardListComponent
    ],
    imports: [
       AngularFireModule.initializeApp(environment.firebase),

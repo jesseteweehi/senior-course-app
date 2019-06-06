@@ -9,8 +9,8 @@ import { CoursesListComponent } from './courses-list/courses-list.component';
 const routes: Routes = [
 { path: 'standards/create', component: StandardsComponent},
 { path: 'courses', children: [
-  { path: '', component: CoursesComponent},
-  { path: ':courseid', component: CoursesListComponent }
+  { path: '', component: CoursesListComponent},
+  { path: ':courseid', component: CoursesComponent }
 ]}
 ];
 

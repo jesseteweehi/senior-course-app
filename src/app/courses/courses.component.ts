@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Course } from './../global/classes';
-import { map } from 'rxjs/operators';
+import { CoursesService } from '../courses.service';
+import { publishReplay, refCount } from 'rxjs/operators';
 
 
 @Component({
@@ -12,47 +12,18 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
-  coursesCollectionRef: AngularFirestoreCollection<Course>;
-  course$: Observable<Course[]>;
+  course$: Observable<Course>;
 
-  form: FormGroup;
+  constructor(
+    private route: ActivatedRoute,
+    private cs: CoursesService
+    ) {
+      const courseid = this.route.snapshot.params.courseid;
+      this.course$ = this.cs.readdoc$('course', courseid).pipe(
+        publishReplay(10),
+        refCount()
+      );
+    }
 
-
-  constructor(private fb: FormBuilder,
-              private afs: AngularFirestore
-              ) {
-                this.coursesCollectionRef = afs.collection<Course>('course');
-                this.course$ = this.coursesCollectionRef.snapshotChanges().pipe(
-                  map(actions => actions.map(a => {
-                    const data = a.payload.doc.data() as Course;
-                    const id = a.payload.doc.id;
-                    return{id, ...data};
-                  })));
-              }
-
-  ngOnInit() {
-    this.form = this.fb.group({
-      date_created: ['', Validators.required],
-      date_updated: ['', Validators.required],
-      title: ['', Validators.required],
-      year_level: ['', Validators.required],
-      subject_code: ['', Validators.required],
-      teacher_in_charge: ['', Validators.required],
-      course_endorsable: ['', Validators.required],
-      course_information: ['', Validators.required],
-      faculty: ['', Validators.required]
-
-    });
-  }
-
-  save() {
-    console.log(this.form.value.title);
-    this.addItem(this.form.value);
-  }
-
-  addItem(item: Course) {
-    console.log(item);
-    this.coursesCollectionRef.add(item);
-  }
-
+  ngOnInit() {}
 }

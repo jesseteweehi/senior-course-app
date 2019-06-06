@@ -1,1 +1,59 @@
-<div>{{(course | async)?.title}}</div>
+<form novalidate [formGroup]="form">
+    <div class="example-container">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Title" formControlName="title">
+      </mat-form-field>
+
+      <!-- <mat-form-field>
+          <mat-select formControlName="faculty" placeholder="Year Level">
+            <mat-option value="Arts">Arts</mat-option>
+            <mat-option value="Maths">Maths</mat-option>
+            <mat-option value="Vocational">Vocational</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+          <mat-select formControlName="year_level" placeholder="Year Level">
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Subject Code" formControlName="subject_code">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Teacher in Charge" formControlName="teacher_in_charge">
+      </mat-form-field>
+
+      <mat-form-field>
+          <mat-select formControlName="course_endorsable" placeholder="Course Endorsement">
+            <mat-option value="Yes">Yes</mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+          <textarea formControlName="course_information" matInput placeholder="Course Information"></textarea>
+      </mat-form-field> -->
+    
+    </div>
+    <button mat-button (click)="save()" color="primary">Save</button>
+    
+</form>
+
+<div class="example-container">
+    <mat-card class="example-full-width" *ngFor="let course of courses$ | async">
+        <mat-card-header>
+          <mat-card-title>{{ course.title }}</mat-card-title>
+          <mat-card-subtitle>{{ course.faculty }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+        </mat-card-content>
+        <mat-card-actions>
+          <a routerLink="{{course.id}}"><button class="btn btn-success pull-right" >Go</button></a>
+        </mat-card-actions>
+    </mat-card>
+</div>

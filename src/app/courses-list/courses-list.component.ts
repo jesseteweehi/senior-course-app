@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
 import { Course } from './../global/classes';
-import { CoursesService } from './../courses.service';
-
-
+import { CoursesService } from '../courses.service';
+import { AngularFirestoreCollection } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-courses-list',
@@ -14,23 +11,32 @@ import { CoursesService } from './../courses.service';
   styleUrls: ['./courses-list.component.css']
 })
 export class CoursesListComponent implements OnInit {
-  private courseDoc: AngularFirestoreDocument<Course>;
-  course$: Observable<any>;
+  courses$: Observable<Course[]>;
+  form: FormGroup;
 
-
-
-  constructor(
-    private afs: AngularFirestore,
-    private route: ActivatedRoute,
-    private cs: CoursesService
-    ) {
-      const courseid = this.route.snapshot.params.courseid;
-      this.course$ = this.cs.readdoc$('course', courseid);
-      // this.courseDoc = this.afs.doc<Course>(`course/${this.courseid}`);
-      // this.course = this.courseDoc.valueChanges();
+  constructor(private fb: FormBuilder,
+              private cs: CoursesService) {
+    this.courses$ = this.cs.readcollection$('course');
     }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+      this.form = this.fb.group({
+        date_created: ['', Validators.required],
+        date_updated: ['', Validators.required],
+        title: ['', Validators.required],
+        year_level: ['', Validators.required],
+        subject_code: ['', Validators.required],
+        teacher_in_charge: ['', Validators.required],
+        course_endorsable: ['', Validators.required],
+        course_information: ['', Validators.required],
+        faculty: ['', Validators.required]
+      });
+    }
+    save() {
+      this.addItem(this.form.value);
+    }
+    addItem(item: Course) {
+      this.cs.create('course', item);
+    }
 
 }
