@@ -15,6 +15,7 @@ import {MatMenuModule,
         MatCheckboxModule,
         MatSlideToggleModule,
         MatCardModule,
+        MatProgressSpinnerModule,
       } from '@angular/material';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -51,7 +52,8 @@ import { StandardListComponent } from './standard-list/standard-list.component';
       MatSliderModule,
       MatCheckboxModule,
       MatSlideToggleModule,
-      MatCardModule
+      MatCardModule,
+      MatProgressSpinnerModule,
    ],
    providers: [
       CoursesService
