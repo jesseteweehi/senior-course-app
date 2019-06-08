@@ -1,3 +1,4 @@
+<ng-template #loading><mat-spinner></mat-spinner></ng-template>
 <ng-container *ngIf="(course$| async) as page; else loading">
 <div class="example-container">
     <mat-card class="example-full-width">
@@ -12,4 +13,91 @@
     </mat-card>
 </div>
 </ng-container>
-<ng-template #loading><mat-spinner></mat-spinner></ng-template>
+<form novalidate [formGroup]="form">
+  <div class="example-container">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Title" formControlName="title">
+    </mat-form-field>
+  
+    <!-- <mat-form-field>
+        <mat-select formControlName="literacy_numeracy" placeholder="Literacy / Numeracy">
+          <mat-option value="L1 Literacy">L1 Literacy</mat-option>
+          <mat-option value="L1 Numeracy">L1 Numeracy</mat-option>
+          <mat-option value="L1 Literacy and Numeracy">L1 Literacy and Numeracy</mat-option>
+          <mat-option value="Reading Literacy">Reading Literacy</mat-option>
+          <mat-option value="Writing Literacy">Writing Literacy</mat-option>
+          <mat-option value="Writing Literacy and Reading Literacy">Writing Literacy and Reading Literacy</mat-option>
+        </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field>
+        <mat-select formControlName="credits" placeholder="Credits">
+          <mat-option value="1">1</mat-option>
+          <mat-option value="2">2</mat-option>
+          <mat-option value="3">3</mat-option>
+          <mat-option value="4">4</mat-option>
+          <mat-option value="5">5</mat-option>
+          <mat-option value="6">6</mat-option>
+          <mat-option value="7">7</mat-option>
+          <mat-option value="8">8</mat-option>
+          <mat-option value="9">9</mat-option>
+          <mat-option value="10">10</mat-option>
+          <mat-option value="11">11</mat-option>
+          <mat-option value="12">12</mat-option>
+          <mat-option value="13">13</mat-option>
+          <mat-option value="14">14</mat-option>
+        </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field>
+        <mat-select formControlName="standardtype" placeholder="Standard Type">
+          <mat-option value="Achievement">Achievement</mat-option>
+          <mat-option value="Unit">Unit</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+    <mat-form-field>
+        <mat-select formControlName="assessmenttype" placeholder="Assessment Type">
+          <mat-option value="Internal">Internal</mat-option>
+          <mat-option value="External">External</mat-option>
+        </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field>
+        <input matInput placeholder="Domain" formControlName="domain">
+    </mat-form-field>
+  
+    <mat-form-field>
+        <input matInput placeholder="Subfield" formControlName="subfield">
+    </mat-form-field>
+  
+    <mat-form-field>
+        <mat-select formControlName="level" placeholder="Assessment level">
+          <mat-option value="1">1</mat-option>
+          <mat-option value="2">2</mat-option>
+          <mat-option value="3">3</mat-option>
+        </mat-select>
+    </mat-form-field> -->
+   
+  
+  
+  </div>
+  <button mat-button (click)="save()" color="primary">Save</button>
+  
+  </form>
+
+<div class="example-container">
+    <mat-card class="example-full-width" *ngFor="let standard of standards$ | async">
+        <mat-card-header>
+          <mat-card-title>{{ standard.title }}</mat-card-title>
+          <mat-card-subtitle>{{ standard.faculty }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+        </mat-card-content>
+        <mat-card-actions>
+          <a routerLink="{{standard.id}}"><button class="btn btn-success pull-right" >Go</button></a>
+        </mat-card-actions>
+    </mat-card>
+</div>
+  
+

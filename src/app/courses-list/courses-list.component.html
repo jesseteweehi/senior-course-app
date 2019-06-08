@@ -1,4 +1,10 @@
-<form novalidate [formGroup]="form">
+<button mat-raised-button color="primary" 
+  *ngIf="showform == false; else formshow" 
+  (click)="show()">Create Course</button>
+
+<ng-template #formshow>
+<form novalidate 
+  [formGroup]="form">
     <div class="example-container">
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Title" formControlName="title">
@@ -43,17 +49,24 @@
     <button mat-button (click)="save()" color="primary">Save</button>
     
 </form>
+</ng-template>
+
+<mat-grid-list cols="4" rowheight="fit">
+  <mat-grid-tile *ngFor="let course of courses$ | async">
+  <mat-card class="card-1">
+    <mat-card-header>
+      <mat-card-title>{{ course.title }}</mat-card-title>
+      <mat-card-subtitle>{{ course.faculty }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+    <mat-card-actions>
+      <a routerLink="{{course.id}}"><button class="btn btn-success pull-right" >Go</button></a>
+    </mat-card-actions>
+  </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
 
 <div class="example-container">
-    <mat-card class="example-full-width" *ngFor="let course of courses$ | async">
-        <mat-card-header>
-          <mat-card-title>{{ course.title }}</mat-card-title>
-          <mat-card-subtitle>{{ course.faculty }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-        </mat-card-content>
-        <mat-card-actions>
-          <a routerLink="{{course.id}}"><button class="btn btn-success pull-right" >Go</button></a>
-        </mat-card-actions>
-    </mat-card>
+    
 </div>

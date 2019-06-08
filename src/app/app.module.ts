@@ -6,7 +6,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StandardsComponent } from './standards/standards.component';
-import {MatMenuModule, 
+import {MatMenuModule,
         MatToolbarModule,
         MatButtonModule,
         MatInputModule,
@@ -16,6 +16,7 @@ import {MatMenuModule,
         MatSlideToggleModule,
         MatCardModule,
         MatProgressSpinnerModule,
+        MatGridListModule
       } from '@angular/material';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -54,6 +55,7 @@ import { StandardListComponent } from './standard-list/standard-list.component';
       MatSlideToggleModule,
       MatCardModule,
       MatProgressSpinnerModule,
+      MatGridListModule
    ],
    providers: [
       CoursesService

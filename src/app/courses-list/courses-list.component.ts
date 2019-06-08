@@ -11,12 +11,13 @@ import { AngularFirestoreCollection } from '@angular/fire/firestore';
   styleUrls: ['./courses-list.component.css']
 })
 export class CoursesListComponent implements OnInit {
+  showform = false;
   courses$: Observable<Course[]>;
   form: FormGroup;
 
   constructor(private fb: FormBuilder,
               private cs: CoursesService) {
-    this.courses$ = this.cs.readcollection$('course');
+    this.courses$ = this.cs.readcollection$('courses');
     }
 
     ngOnInit() {
@@ -33,10 +34,14 @@ export class CoursesListComponent implements OnInit {
       });
     }
     save() {
+      this.showform = false;
       this.addItem(this.form.value);
     }
     addItem(item: Course) {
-      this.cs.create('course', item);
+      this.cs.create('courses', item);
+    }
+    show() {
+      this.showform = true;
     }
 
 }
