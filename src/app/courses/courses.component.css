@@ -1,12 +1,12 @@
-.example-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .example-container > * {
-    width: 100%;
-  }
+button {
+  margin: 3px;
+}
+.card-1 {  
+  margin: 5px;
+  min-width: 300px;
+}
 
-  mat-card {
-    margin: 5px;
-  }
+.title {
+  padding-right: 6px;
+  color: grey;
+}

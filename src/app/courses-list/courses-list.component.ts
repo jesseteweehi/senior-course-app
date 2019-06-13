@@ -43,5 +43,8 @@ export class CoursesListComponent implements OnInit {
     show() {
       this.showform = true;
     }
+    remove(id: string) {
+      this.cs.remove('courses', id);
+    }
 
 }

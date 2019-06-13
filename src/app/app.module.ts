@@ -16,7 +16,10 @@ import {MatMenuModule,
         MatSlideToggleModule,
         MatCardModule,
         MatProgressSpinnerModule,
-        MatGridListModule
+        MatGridListModule,
+        MatChipsModule,
+        MatIconModule,
+        MatExpansionModule
       } from '@angular/material';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -25,7 +28,7 @@ import { CoursesComponent } from './courses/courses.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CoursesService } from './courses.service';
 import { StandardListComponent } from './standard-list/standard-list.component';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -36,7 +39,7 @@ import { StandardListComponent } from './standard-list/standard-list.component';
       StandardsComponent,
       CoursesComponent,
       CoursesListComponent,
-      StandardListComponent
+      StandardListComponent,
    ],
    imports: [
       AngularFireModule.initializeApp(environment.firebase),
@@ -55,7 +58,11 @@ import { StandardListComponent } from './standard-list/standard-list.component';
       MatSlideToggleModule,
       MatCardModule,
       MatProgressSpinnerModule,
-      MatGridListModule
+      MatGridListModule,
+      FlexLayoutModule,
+      MatChipsModule,
+      MatIconModule,
+      MatExpansionModule
    ],
    providers: [
       CoursesService

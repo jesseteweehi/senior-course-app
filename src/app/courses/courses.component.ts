@@ -13,6 +13,7 @@ import { publishReplay, refCount } from 'rxjs/operators';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
+  showform = false;
   course$: Observable<Course>;
   standards$: Observable<Standard[]>;
   courseid: string;
@@ -49,7 +50,11 @@ export class CoursesComponent implements OnInit {
       literacy_numeracy: ['', Validators.required]
     });
   }
+  show() {
+    this.showform = true;
+  }
   save() {
+    this.showform = false;
     this.addItem(this.form.value);
   }
   addItem(item: Course) {
