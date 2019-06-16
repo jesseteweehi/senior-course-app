@@ -18,13 +18,19 @@ export interface Standard {
     standardno: string;
     version: string;
     assessmenttype: string;
-    opportunities_offered: string;
-    domain: string;
-    subfield: string;
+    further_assessment: string;
     level: string;
     credits: string;
     title: string;
     literacy_numeracy: string;
     assessment_method: string;
-    approximate_date_due: string;
+    completion: string;
+}
+
+export interface Link {
+    date_created: string;
+    date_updated: string;
+    title: string;
+    description: string;
+    link: string;
 }

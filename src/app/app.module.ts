@@ -19,7 +19,9 @@ import {MatMenuModule,
         MatGridListModule,
         MatChipsModule,
         MatIconModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatDividerModule,
+        MatListModule
       } from '@angular/material';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -62,7 +64,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       FlexLayoutModule,
       MatChipsModule,
       MatIconModule,
-      MatExpansionModule
+      MatExpansionModule,
+      MatDividerModule,
+      MatListModule
    ],
    providers: [
       CoursesService

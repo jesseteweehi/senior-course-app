@@ -8,5 +8,25 @@ button {
 
 .title {
   padding-right: 6px;
-  color: grey;
+  color: black;
+  font-style: oblique;
+}
+
+mat-divider {
+  padding-top: 5px;
+  padding-bottom: 8px;
+}
+
+.matover {
+  min-width: 100px;
+  overflow: hidden;
+}
+
+span {
+  margin-left: 8px;
+}
+
+p {
+  margin: 0;
+  padding: 2px;
 }

@@ -19,6 +19,7 @@ export class CoursesComponent implements OnInit {
   courseid: string;
 
   form: FormGroup;
+  formstandard: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -38,16 +39,19 @@ export class CoursesComponent implements OnInit {
       standardtype: ['Achievement', Validators.required],
       assessmenttype: ['Internal', Validators.required],
       assessment_method: ['', Validators.required],
-      opportunities_offered: ['', Validators.required],
+      further_assessment: ['', Validators.required],
       approximate_date_due: ['', Validators.required],
       standardno: ['', Validators.required],
       version: ['', Validators.required],
-      domain: ['', Validators.required],
-      subfield: ['', Validators.required],
       level: ['1', Validators.required],
       credits: ['', Validators.required],
       title: ['', Validators.required],
-      literacy_numeracy: ['', Validators.required]
+      literacy_numeracy: ['NA', Validators.required],
+      completion: ['Term 4', Validators.required]
+    });
+
+    this.formstandard = this.fb.group({
+      title: ['', Validators.required],
     });
   }
   show() {
@@ -56,8 +60,13 @@ export class CoursesComponent implements OnInit {
   save() {
     this.showform = false;
     this.addItem(this.form.value);
+    this.form.reset();
   }
   addItem(item: Course) {
     this.cs.create(`courses/${this.courseid}/standards`, item);
+  }
+
+  remove(id: string) {
+    this.cs.remove(`courses/${this.courseid}/standards`, id);
   }
 }
