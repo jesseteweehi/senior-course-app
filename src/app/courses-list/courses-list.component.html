@@ -1,6 +1,12 @@
+{{ user | json }}
+
+<div *ngIf="(user$ | async) as user">
+
+<div *ngIf="user.role">
 <button mat-raised-button color="primary" 
-  *ngIf="showform == false; else formshow" 
+  *ngIf="showform == false; else formshow"
   (click)="show()">Create Course</button>
+</div>
 
 <ng-template #formshow>
 
@@ -8,7 +14,7 @@
   [formGroup]="form">
    <div fxLayout="column">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Title" formControlName="title">
+        <input matInput placeholder="Title" formControlName="subject_name">
       </mat-form-field>
 
       <mat-form-field>
@@ -53,13 +59,34 @@
 </form>
 </ng-template>
 
+
+
+<!-- <div>
+  <h4>Filter by size</h4>
+  <button (click)="filterBySize('small')">Small</button>
+  <button (click)="filterBySize('medium')">Medium</button>
+  <button (click)="filterBySize('large')">Large</button>
+  <button (click)="filterBySize(null)" *ngIf="this.sizeFilter$.getValue()">
+    <em>clear filter</em>
+  </button>
+</div>
+<div>
+  <h4>Filter by color</h4>
+  <button (click)="filterByColor('red')">Red</button>
+  <button (click)="filterByColor('green')">Blue</button>
+  <button (click)="filterByColor('blue')">Green</button>
+  <button (click)="filterByColor(null)" *ngIf="this.colorFilter$.getValue()">
+    <em>clear filter</em>
+  </button>
+</div> -->
+
 <div fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="flex-start">
   <ng-container *ngFor="let course of courses$ | async">
       <mat-card fxFlex="0 1 calc(33.3% - 32px)" class="card-1">
           <mat-card-header>
             <mat-card-title>
               <span class="title">{{ course.subject_code }}</span>
-              <span>{{ course.title }}</span></mat-card-title>
+              <span>{{ course.subject_name }}</span></mat-card-title>
               <span fxFlex></span>
               <mat-chip-list>
                 <mat-chip>{{course.faculty}}</mat-chip>
@@ -95,6 +122,8 @@
           </mat-card-actions>
         </mat-card>
   </ng-container>
+</div>
+
 </div>
 
 

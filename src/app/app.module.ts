@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,11 +27,14 @@ import {MatMenuModule,
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CoursesComponent } from './courses/courses.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CoursesService } from './courses.service';
 import { StandardListComponent } from './standard-list/standard-list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ResourcesComponent } from './resources/resources.component';
+import { AuthService } from './auth.service';
 
 
 
@@ -42,10 +46,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       CoursesComponent,
       CoursesListComponent,
       StandardListComponent,
+      ResourcesComponent,
    ],
    imports: [
       AngularFireModule.initializeApp(environment.firebase),
       AngularFirestoreModule,
+      AngularFireAuthModule,
       BrowserAnimationsModule,
       BrowserModule,
       ReactiveFormsModule,
@@ -66,10 +72,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       MatIconModule,
       MatExpansionModule,
       MatDividerModule,
-      MatListModule
+      MatListModule,
+      HttpClientModule
    ],
    providers: [
-      CoursesService
+      CoursesService, AuthService
    ],
    bootstrap: [
       AppComponent

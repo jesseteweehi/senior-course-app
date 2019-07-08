@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Course } from './../global/classes';
+import { Course, User } from './../global/classes';
 import { CoursesService } from '../courses.service';
-import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AuthService } from './../auth.service';
+
 
 @Component({
   selector: 'app-courses-list',
@@ -11,20 +12,23 @@ import { AngularFirestoreCollection } from '@angular/fire/firestore';
   styleUrls: ['./courses-list.component.css']
 })
 export class CoursesListComponent implements OnInit {
+  user$: Observable<User>;
   showform = false;
   courses$: Observable<Course[]>;
   form: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private cs: CoursesService) {
+              private cs: CoursesService,
+              private as: AuthService) {
     this.courses$ = this.cs.readcollection$('courses');
     }
 
     ngOnInit() {
+      this.user$ = this.as.user$;
       this.form = this.fb.group({
         date_created: ['', Validators.required],
         date_updated: ['', Validators.required],
-        title: ['', Validators.required],
+        subject_name: ['', Validators.required],
         year_level: ['', Validators.required],
         subject_code: ['', Validators.required],
         teacher_in_charge: ['', Validators.required],

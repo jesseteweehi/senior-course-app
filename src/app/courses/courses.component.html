@@ -3,7 +3,7 @@
     <mat-card-header>
       <mat-card-title>
         <span class="title">{{ course.subject_code }}</span>
-        <span>{{ course.title }}</span></mat-card-title>
+        <span>{{ course.subject_name }}</span></mat-card-title>
         <span fxFlex></span>
         <mat-chip-list>
           <mat-chip>{{course.faculty}}</mat-chip>
@@ -17,18 +17,13 @@
         <span >No Endorsement</span>
        </ng-template>
         <br>
-        <a href = "mailto: abc@example.com">{{course.teacher_in_charge}}</a>     
-        <br>
-        <div class="title">Level {{course.year_level}}</div>
-        <br>
-        
+        <a href = "mailto: abc@example.com">{{course.teacher_in_charge}}</a>            
       </mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="" alt="Picture">
     <mat-card-content>
       {{ course.course_information}}
     </mat-card-content>
-    <mat-card-actions>
+    <!-- <mat-card-actions>
         <button mat-icon-button (click)="remove(course.id)">
             <mat-icon>delete</mat-icon>
         </button>
@@ -36,7 +31,7 @@
       <a routerLink="{{course.id}}"><button mat-icon-button aria-label="Example icon-button with a heart icon">
           <mat-icon>arrow_forward</mat-icon>
         </button></a>
-    </mat-card-actions>
+    </mat-card-actions> -->
   </mat-card>
 </ng-container>
 
@@ -175,7 +170,7 @@
     <mat-accordion>
         <mat-expansion-panel class="card-1" *ngFor="let standard of standards$ | async">
           <mat-expansion-panel-header
-          collapsedHeight="120px"
+          collapsedHeight="80px"
           >
             <mat-panel-title >
                 <span>{{standard.standardtype}}{{standard.standardno}} vr{{standard.version}}</span>
@@ -220,29 +215,9 @@
 
             <mat-divider></mat-divider>
 
-            <mat-list>
-                <mat-list-item>
-                  <h3 matLine> Title </h3>
-                  <p matLine>
-                    <span> Message </span>
-                  </p>
-                  <button mat-icon-button class="primary">
-                      <mat-icon>arrow_forward</mat-icon>
-                  </button>
-                </mat-list-item>
-            </mat-list>
+            <app-resources class="resource" [standardid]="standard.id"></app-resources>
 
-        <div>
-          <form novalidate 
-            [formGroup]="formstandard">
-             <div fxLayout="column">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Title" formControlName="title">
-                </mat-form-field>
-              </div>
-              <button mat-button (click)="savestandard()" color="primary">Save</button>            
-          </form>
-        </div>
+       
         
         <mat-action-row>
             <button mat-icon-button (click)="addstandard(standard.id)">

@@ -2,7 +2,7 @@ export interface Course {
     id?: string;
     date_created: string;
     date_updated: string;
-    title: string;
+    subject_name: string;
     year_level: string;
     subject_code: string;
     teacher_in_charge: string;
@@ -33,4 +33,16 @@ export interface Link {
     title: string;
     description: string;
     link: string;
+}
+
+export interface Roles {
+    student?: boolean;
+    teacher?: boolean;
+    admin?: boolean;
+ }
+
+export interface User {
+    uid: string;
+    email: string;
+    roles: Roles;
 }
