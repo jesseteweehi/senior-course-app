@@ -1,0 +1,32 @@
+<mat-list>
+    <mat-list-item *ngFor="let item of links$ | async">
+      <h3 matLine>{{ item.title }} </h3>
+      <p matLine>
+        <span> {{ item.description }} </span>
+      </p>
+      <button mat-icon-button class="primary" (click)="deletelink(item.id)">
+          <mat-icon>delete</mat-icon>
+      </button>
+      <a mat-icon-button color="primary" target="_blank" href="{{item.link}}">
+          <mat-icon>arrow_forward</mat-icon>
+      </a>
+    </mat-list-item>
+</mat-list>
+
+<div>
+    <form novalidate 
+      [formGroup]="formstandard">
+       <div fxLayout="column">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Title" formControlName="title">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="Description" formControlName="description"></textarea>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+              <input matInput placeholder="Link" formControlName="link">
+            </mat-form-field>
+        </div>
+        <button mat-button (click)="savelink()" color="primary">Save</button>            
+    </form>
+</div>
