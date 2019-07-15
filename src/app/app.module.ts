@@ -22,7 +22,8 @@ import {MatMenuModule,
         MatIconModule,
         MatExpansionModule,
         MatDividerModule,
-        MatListModule
+        MatListModule,
+        MatTabsModule
       } from '@angular/material';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -31,11 +32,18 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CoursesComponent } from './courses/courses.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CoursesService } from './courses.service';
-import { StandardListComponent } from './standard-list/standard-list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ResourcesComponent } from './resources/resources.component';
 import { AuthService } from './auth.service';
-
+import { CoursesWrapperComponent } from './courses-wrapper/courses-wrapper.component';
+import { MyCoursesComponent } from './mycourses/my-courses/my-courses.component';
+import { MyStandardsComponent } from './mycourses/my-standards/my-standards.component';
+import { MyCoursesWrapperComponent } from './mycourses/my-courses-wrapper/my-courses-wrapper.component';
+import { MyCoursesDashboardComponent } from './mycourses/my-courses-dashboard/my-courses-dashboard.component';
+import { MyCourseDashboardComponent } from './mycourses/my-course-dashboard/my-course-dashboard.component';
+import { MyCourseWrapperComponent } from './mycourses/my-course-wrapper/my-course-wrapper.component';
+import { MyCourseActionComponent } from './mycourses/my-course-action/my-course-action.component';
+import { FilterPipe } from './global/filter.pipe';
 
 
 
@@ -45,8 +53,16 @@ import { AuthService } from './auth.service';
       StandardsComponent,
       CoursesComponent,
       CoursesListComponent,
-      StandardListComponent,
       ResourcesComponent,
+      CoursesWrapperComponent,
+      MyCoursesComponent,
+      MyCoursesDashboardComponent,
+      MyCoursesWrapperComponent,
+      MyStandardsComponent,
+      MyCourseActionComponent,
+      MyCourseDashboardComponent,
+      MyCourseWrapperComponent,
+      FilterPipe
    ],
    imports: [
       AngularFireModule.initializeApp(environment.firebase),
@@ -73,10 +89,12 @@ import { AuthService } from './auth.service';
       MatExpansionModule,
       MatDividerModule,
       MatListModule,
-      HttpClientModule
+      HttpClientModule,
+      MatTabsModule
    ],
    providers: [
-      CoursesService, AuthService
+      CoursesService,
+      AuthService
    ],
    bootstrap: [
       AppComponent

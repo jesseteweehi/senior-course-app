@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Course, User } from './../global/classes';
 import { CoursesService } from '../courses.service';
 import { AuthService } from './../auth.service';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -12,19 +13,22 @@ import { AuthService } from './../auth.service';
   styleUrls: ['./courses-list.component.css']
 })
 export class CoursesListComponent implements OnInit {
-  user$: Observable<User>;
   showform = false;
   courses$: Observable<Course[]>;
   form: FormGroup;
+  useruid: string;
 
   constructor(private fb: FormBuilder,
               private cs: CoursesService,
-              private as: AuthService) {
+              private auth: AuthService) {
     this.courses$ = this.cs.readcollection$('courses');
+    this.auth.user()
+        .subscribe(user => {
+          this.useruid = user.uid;
+        });
     }
 
     ngOnInit() {
-      this.user$ = this.as.user$;
       this.form = this.fb.group({
         date_created: ['', Validators.required],
         date_updated: ['', Validators.required],
@@ -50,5 +54,13 @@ export class CoursesListComponent implements OnInit {
     remove(id: string) {
       this.cs.remove('courses', id);
     }
+
+    addCourse(courseid: string, uid: string) {
+      this.cs.createWithJustId(`users/${this.useruid}/mycourses`, courseid );
+    }
+
+    // customclaims() {
+    //   return this.as.customclaims;
+    // }
 
 }

@@ -1,63 +1,69 @@
-{{ user | json }}
+<!-- {{ auth.as.user | async | json }} -->
+<!-- {{ (auth.customclaims | async)?.claims.admin  }} -->
 
-<div *ngIf="(user$ | async) as user">
+<!-- {{courses$ | async | json}} -->
 
-<div *ngIf="user.role">
-<button mat-raised-button color="primary" 
-  *ngIf="showform == false; else formshow"
-  (click)="show()">Create Course</button>
-</div>
 
-<ng-template #formshow>
 
-<form novalidate 
-  [formGroup]="form">
-   <div fxLayout="column">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Title" formControlName="subject_name">
-      </mat-form-field>
 
-      <mat-form-field>
-          <mat-select formControlName="faculty" placeholder="Faculty">
-            <mat-option value="Arts">Arts</mat-option>
-            <mat-option value="Maths">Maths</mat-option>
-            <mat-option value="Vocational">Vocational</mat-option>
-          </mat-select>
-      </mat-form-field>
 
-      <mat-form-field>
-          <mat-select formControlName="year_level" placeholder="Year Level">
-            <mat-option value="1">1</mat-option>
-            <mat-option value="2">2</mat-option>
-            <mat-option value="3">3</mat-option>
-            <mat-option value="Composite">Composite</mat-option>
-          </mat-select>
-      </mat-form-field>
 
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Subject Code" formControlName="subject_code">
-      </mat-form-field>
+  <!-- <button mat-raised-button color="primary" 
+    *ngIf="showform == false; else formshow"
+    (click)="show()">Create Course</button> -->
 
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Teacher in Charge" formControlName="teacher_in_charge">
-      </mat-form-field>
 
-      <mat-form-field>
-          <mat-select formControlName="course_endorsable" placeholder="Course Endorsement">
-            <mat-option value="Yes">Yes</mat-option>
-            <mat-option value="No">No</mat-option>
-          </mat-select>
-      </mat-form-field>
+  <!-- <ng-template #formshow>
 
-      <mat-form-field class="example-full-width">
-          <textarea formControlName="course_information" matInput placeholder="Course Information"></textarea>
-      </mat-form-field>
-    
-    </div>
-    <button mat-button (click)="save()" color="primary">Save</button>
-    
-</form>
-</ng-template>
+    <form novalidate 
+      [formGroup]="form">
+      <div fxLayout="column">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Title" formControlName="subject_name">
+          </mat-form-field>
+
+          <mat-form-field>
+              <mat-select formControlName="faculty" placeholder="Faculty">
+                <mat-option value="Arts">Arts</mat-option>
+                <mat-option value="Maths">Maths</mat-option>
+                <mat-option value="Vocational">Vocational</mat-option>
+              </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+              <mat-select formControlName="year_level" placeholder="Year Level">
+                <mat-option value="1">1</mat-option>
+                <mat-option value="2">2</mat-option>
+                <mat-option value="3">3</mat-option>
+                <mat-option value="Composite">Composite</mat-option>
+              </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Subject Code" formControlName="subject_code">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Teacher in Charge" formControlName="teacher_in_charge">
+          </mat-form-field>
+
+          <mat-form-field>
+              <mat-select formControlName="course_endorsable" placeholder="Course Endorsement">
+                <mat-option value="Yes">Yes</mat-option>
+                <mat-option value="No">No</mat-option>
+              </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+              <textarea formControlName="course_information" matInput placeholder="Course Information"></textarea>
+          </mat-form-field>
+        
+        </div>
+        <button mat-button (click)="save()" color="primary">Save</button>
+        
+    </form>
+  </ng-template> -->
+
 
 
 
@@ -80,6 +86,8 @@
   </button>
 </div> -->
 
+
+
 <div fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="flex-start">
   <ng-container *ngFor="let course of courses$ | async">
       <mat-card fxFlex="0 1 calc(33.3% - 32px)" class="card-1">
@@ -91,30 +99,28 @@
               <mat-chip-list>
                 <mat-chip>{{course.faculty}}</mat-chip>
               </mat-chip-list>
-
+      
             <mat-card-subtitle>
-              <span class="title">Level {{course.year_level}}</span>
+              <span class="title">Year {{course.year_level}}</span>
               <br> 
               <span *ngIf="course.course_endorsable == 'Yes'; else: courseno">Course Endorsable</span>
               <ng-template #courseno>
               <span >No Endorsement</span>
              </ng-template>
               <br>
-              <a href = "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=target@email.com">{{course.teacher_in_charge}}</a>     
-              <br>
-              <!-- <div class="title">Level {{course.year_level}}</div> -->
-              <br>
-              
+              <a href = "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=target@email.com">{{course.teacher_in_charge}}</a>                 
             </mat-card-subtitle>
           </mat-card-header>
-          <img mat-card-image src="https://source.unsplash.com/collection/151521/300x100" alt="Picture">
           <mat-card-content>
             {{ course.course_information}}
           </mat-card-content>
           <mat-card-actions>
-              <button mat-icon-button (click)="remove(course.id)">
+              <button *ngIf="auth.as.authState | async" mat-icon-button (click)="remove(course.id)">
                   <mat-icon>delete</mat-icon>
               </button>
+              <button *ngIf="auth.as.authState | async" mat-icon-button aria-label (click)="addCourse(course.id, useruid )">
+                  <mat-icon>add</mat-icon>
+               </button>
             <span fxFlex></span>
             <a routerLink="{{course.id}}"><button mat-icon-button aria-label="Example icon-button with a heart icon">
                 <mat-icon>arrow_forward</mat-icon>
@@ -124,7 +130,6 @@
   </ng-container>
 </div>
 
-</div>
 
 
 

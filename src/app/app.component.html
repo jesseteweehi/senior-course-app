@@ -1,15 +1,16 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span><a mat-button routerLink="/courses">Courses</a></span>
-    <span><a mat-button routerLink="/teachers">Courses</a></span>
+    <span><a *ngIf="useruid" mat-button routerLink="/{{useruid}}">My Courses</a></span>
     <button mat-icon-button (click)="login()">
         <mat-icon>account_circle</mat-icon>
     </button>
 </mat-toolbar-row>
 </mat-toolbar>
 
-{{ user | async | json }}
+<!-- {{ useruid }}
 
+{{ (auth.customclaims | async)?.claims.admin | json }} -->
 
 <router-outlet></router-outlet>
 

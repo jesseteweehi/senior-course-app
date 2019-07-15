@@ -1,0 +1,50 @@
+<p>
+  my-standards works!
+</p>
+
+<div *ngIf="standardsJoined$ | async; let standardsJoined$ ">
+    <section class="mat-typography">
+      <h4>My Standards</h4>
+    </section>
+    <mat-accordion>
+      <mat-expansion-panel class="card-1" *ngFor="let standard of standardsJoined$">
+        <mat-expansion-panel-header collapsedHeight="80px">
+          <mat-panel-title >
+              <span>{{standard.standardtype}}{{standard.standardno}} vr{{standard.version}}</span>
+              <span fxFlex></span> 
+          </mat-panel-title>
+          <mat-panel-description>
+              <span style="max-height: 53px; text-overflow: ellipsis">{{ standard.title }}</span>
+              <span fxFlex></span>
+              <!-- <span>{{standard.assessmenttype}}</span>
+              <span class="title">{{standard.credits}} Credits</span>                 -->
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div fxLayout="column">
+          <div fxLayout="row">
+            <div fxFlex="20">
+                {{standard.assessmenttype}} Level: {{standard.level}}
+            </div>
+            <div fxFlex></div>
+            <div fxFlex="50">
+                <div>{{standard.literacy_numeracy}}</div>
+                <div fxFlex></div>
+                <div>Cr: {{standard.credits}}</div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div fxLayout="row">
+            <div fxFlex="20">
+                {{standard.assessment_method}}
+            </div>
+            <div fxFlex></div>
+            <div fxFlex="50">
+                <div>{{standard.further_assessment}} further Assessment</div>
+                <div fxFlex></div>
+                <div>Due: {{standard.completion}}</div>                   
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+</div>

@@ -1,0 +1,35 @@
+<mat-card *ngFor="let course of mycourses$ | async" class="card-1">
+    <mat-card-header>
+      <mat-card-title>
+        <span class="title">{{ course.subject_code }}</span>
+        <span>{{ course.subject_name }}</span></mat-card-title>
+        <span fxFlex></span>
+        <mat-chip-list>
+          <mat-chip>{{course.faculty}}</mat-chip>
+        </mat-chip-list>
+
+      <mat-card-subtitle>
+        <span class="title">Year {{course.year_level}}</span>
+        <br> 
+        <span *ngIf="course.course_endorsable == 'Yes'; else: courseno">Course Endorsable</span>
+        <ng-template #courseno>
+        <span >No Endorsement</span>
+       </ng-template>       
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      {{ course.course_information}}
+    </mat-card-content>
+    <mat-card-actions>
+      <span fxFlex></span>
+      <a routerLink="{{course.id}}"><button mat-icon-button aria-label="Example icon-button with a heart icon">
+          <mat-icon>arrow_forward</mat-icon>
+        </button></a>
+    </mat-card-actions>
+  </mat-card>
+
+<!-- <div >
+  {{ course.subject_code}}
+</div> -->
+
+
