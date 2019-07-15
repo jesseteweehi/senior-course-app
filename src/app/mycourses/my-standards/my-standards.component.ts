@@ -12,6 +12,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./my-standards.component.css']
 })
 export class MyStandardsComponent implements OnInit {
+  selected = 'null';
+
   standardsJoined$: Observable<MyStandard[]>;
   userid: string;
 

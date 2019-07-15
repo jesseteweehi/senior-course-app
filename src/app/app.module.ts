@@ -1,3 +1,4 @@
+import { CreditPipe } from './global/credit.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -62,7 +63,8 @@ import { FilterPipe } from './global/filter.pipe';
       MyCourseActionComponent,
       MyCourseDashboardComponent,
       MyCourseWrapperComponent,
-      FilterPipe
+      FilterPipe,
+      CreditPipe
    ],
    imports: [
       AngularFireModule.initializeApp(environment.firebase),

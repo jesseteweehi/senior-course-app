@@ -1,13 +1,27 @@
-<p>
-  my-standards works!
-</p>
+<div>
+    <span><h2 class="mat-h2">Standard List</h2></span>
+    <span fxFlex></span> 
+    <span><h2 class="mat-h2">Filter:</h2></span>
+    <span>
+        <mat-form-field>
+            <mat-select [(value)]="selected">
+              <mat-option value="null">None</mat-option>
+              <mat-option value="Not yet assessed">Not yet assessed</mat-option>
+              <mat-option value="attained">Attained</mat-option>
+              <mat-option value="Not Achieved">Not Achieved</mat-option>
+              <mat-option value="Achieved">Achieved</mat-option>
+              <mat-option value="Achieved with Merit">Achieved with Merit</mat-option>
+              <mat-option value="Achieved with Excellence">Achieved with Excellence</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </span>
+    </div>
 
 <div *ngIf="standardsJoined$ | async; let standardsJoined$ ">
-    <section class="mat-typography">
-      <h4>My Standards</h4>
-    </section>
+  <h2 class="mat-h1">Credits Total: {{ standardsJoined$ | filter :'result': selected | credit : 'credits'}}</h2>
+  
     <mat-accordion>
-      <mat-expansion-panel class="card-1" *ngFor="let standard of standardsJoined$">
+      <mat-expansion-panel class="card-1" *ngFor="let standard of standardsJoined$ | filter :'result': selected">
         <mat-expansion-panel-header collapsedHeight="80px">
           <mat-panel-title >
               <span>{{standard.standardtype}}{{standard.standardno}} vr{{standard.version}}</span>
@@ -16,8 +30,6 @@
           <mat-panel-description>
               <span style="max-height: 53px; text-overflow: ellipsis">{{ standard.title }}</span>
               <span fxFlex></span>
-              <!-- <span>{{standard.assessmenttype}}</span>
-              <span class="title">{{standard.credits}} Credits</span>                 -->
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div fxLayout="column">
@@ -48,3 +60,9 @@
       </mat-expansion-panel>
     </mat-accordion>
 </div>
+  
+      
+      
+      
+      
+      

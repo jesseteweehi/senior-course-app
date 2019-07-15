@@ -12,12 +12,9 @@ import { map, tap, mergeMap } from 'rxjs/operators';
 })
 export class MyCourseDashboardComponent implements OnInit {
   @Input() course$: Observable<Course>;
+  selected = 'null';
+
   standardsJoined$: Observable<any[]>;
-  standardsLeft$: Observable<MyStandard[]>;
-  standardsNotAchieved$: Observable<MyStandard[]>;
-  standardsAchieved$: Observable<MyStandard[]>;
-  standardsMerit$: Observable<MyStandard[]>;
-  standardsExcellence$: Observable<MyStandard[]>;
   courseid: string;
   userid: string;
 
