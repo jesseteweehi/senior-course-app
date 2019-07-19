@@ -14,3 +14,8 @@
     color: grey;
     font-style: oblique;
 }
+
+.nav {
+    padding-top: 0px;
+    margin-left: 5px;
+}

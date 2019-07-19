@@ -1,8 +1,8 @@
-import { CoursesService } from './../courses.service';
+import { CoursesService } from '../../courses.service';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Link } from './../global/classes';
+import { Link } from '../../global/classes';
 import { Observable } from 'rxjs';
 
 

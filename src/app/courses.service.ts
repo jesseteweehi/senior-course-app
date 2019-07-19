@@ -1,5 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app'; 
+import 'firebase/firestore';
 import { Observable, combineLatest } from 'rxjs';
 import { tap, map, mergeMap, toArray } from 'rxjs/operators';
 
@@ -13,6 +15,10 @@ constructor(
   @Inject(AngularFirestore) private afs: AngularFirestore,
 ) {}
 
+  get timestamp() {
+    return firebase.firestore.FieldValue.serverTimestamp();
+  }
+
   readdoc$(path: string, id: string): Observable<any> {
     return this.afs.doc<any>(`${path}/${id}`).valueChanges()
     .pipe(
@@ -25,7 +31,7 @@ constructor(
     );
   }
 
-  querycollection$(path: string, key: string, cond: string, query: string): Observable<any[]> {
+  querycollection$(path: string, key: string, cond: any, query: string): Observable<any[]> {
     return this.afs.collection<any[]>(path, ref => ref.where(key, cond, query)).valueChanges().pipe(
       tap(r => {
           console.groupCollapsed(`Firestore Streaming [${path}] [readcollection$]`);
@@ -35,20 +41,6 @@ constructor(
       )
     );
   }
-
-
-  
-
-  // readcollectionGroup$(path: string): Observable<any[]> {
-  //   return this.afs.collectionGroup(path).valueChanges().pipe(
-  //     tap(r => {
-  //         console.groupCollapsed(`Firestore Streaming [${path}] [readcollectionGroup$]`);
-  //         console.log(r);
-  //         console.groupEnd();
-  //       }
-  //     )
-  //   );
-  // }
 
   readcollection$(path: string): Observable<any[]> {
     return this.afs.collection<any[]>(path).valueChanges().pipe(
@@ -145,11 +137,19 @@ constructor(
 
   create(path: string, value: any) {
     const id = this.afs.createId();
-    return this.afs.collection<any>(path).doc(id).set(Object.assign({}, { id }, value)).then(_ => {
+    return this.afs.collection<any>(path).doc(id).set(Object.assign({date_created : this.timestamp }, { id }, value)).then(_ => {
             console.groupCollapsed(`Firestore Service [${path}] [create]`);
             console.log('[Id]', id, value);
             console.groupEnd();
         });
+  }
+
+  update(path: string, value: any) {
+    return this.afs.doc<any>(path).update(Object.assign({date_updated : this.timestamp }, value)).then(_ => {
+      console.groupCollapsed(`Firestore Service [${path}] [update]`);
+      console.log(value);
+      console.groupEnd();
+    });
   }
 
   remove(path: string, id: string) {

@@ -7,7 +7,6 @@
         <mat-chip-list>
           <mat-chip>{{course.faculty}}</mat-chip>
         </mat-chip-list>
-
       <mat-card-subtitle>
         <span class="title">Year {{course.year_level}}</span>
         <br> 
@@ -21,12 +20,11 @@
       {{ course.course_information}}
     </mat-card-content>
     <mat-card-actions>
-      <span fxFlex></span>
-      <a routerLink="{{course.id}}"><button mat-icon-button aria-label="Example icon-button with a heart icon">
-          <mat-icon>arrow_forward</mat-icon>
+        <a routerLink="{{course.id}}"><button class="nav" mat-icon-button aria-label="Forwards">
+            <mat-icon>arrow_forward</mat-icon>
         </button></a>
     </mat-card-actions>
-  </mat-card>
+</mat-card>
 
 <!-- <div >
   {{ course.subject_code}}

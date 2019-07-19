@@ -23,21 +23,17 @@
       <mat-card-content>
         {{ course.course_information}}
       </mat-card-content>
-      <!-- <mat-card-actions>
-          <button mat-icon-button (click)="remove(course.id)">
-              <mat-icon>delete</mat-icon>
-          </button>
-        <span fxFlex></span>
-        <a routerLink="{{course.id}}"><button mat-icon-button aria-label="Example icon-button with a heart icon">
-            <mat-icon>arrow_forward</mat-icon>
-          </button></a>
-      </mat-card-actions> -->
     </mat-card>
   </ng-container>
 
 <ng-template #loading><mat-spinner></mat-spinner></ng-template>
   
 <mat-divider></mat-divider>
+
+<div>
+  <span><h2 class="mat-h2">Standard List</h2></span>
+  <span fxFlex></span> 
+</div>
 
 <div class="example-container">
     <mat-accordion>

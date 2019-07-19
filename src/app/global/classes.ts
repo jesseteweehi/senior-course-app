@@ -1,7 +1,7 @@
 export interface Course {
     id?: string;
-    date_created: string;
-    date_updated: string;
+    date_created?: string;
+    date_updated?: string;
     subject_name: string;
     year_level: string;
     subject_code: string;

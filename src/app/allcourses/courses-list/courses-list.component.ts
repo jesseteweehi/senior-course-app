@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Course, User } from './../global/classes';
-import { CoursesService } from '../courses.service';
-import { AuthService } from './../auth.service';
+import { Course, User } from '../../global/classes';
+import { CoursesService } from '../../courses.service';
+import { AuthService } from '../../auth.service';
 import { takeUntil } from 'rxjs/operators';
 
 
@@ -14,18 +14,35 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class CoursesListComponent implements OnInit {
   showform = false;
-  courses$: Observable<Course[]>;
   form: FormGroup;
   useruid: string;
+  // Filtering
+  fullCourses: Course[];
+  filteredCourses: Course[];
+  private _searchTerm: string;
+
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+
+  set searchTerm(value: string) {
+    console.log(value);
+    this._searchTerm = value;
+    if (value === '') {
+      this.filteredCourses = this.fullCourses;
+    } else {
+      this.filteredCourses = this.filtereCourses(value);
+    }
+  }
+
+  filtereCourses(searchString: string) {
+    return this.fullCourses.filter(course =>
+      course.subject_name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
+  }
 
   constructor(private fb: FormBuilder,
-              private cs: CoursesService,
-              private auth: AuthService) {
-    this.courses$ = this.cs.readcollection$('courses');
-    this.auth.user()
-        .subscribe(user => {
-          this.useruid = user.uid;
-        });
+              private cs: CoursesService) {
+    this.cs.readcollection$('courses').subscribe(courses => this.fullCourses = this.filteredCourses = courses);
     }
 
     ngOnInit() {
@@ -51,16 +68,5 @@ export class CoursesListComponent implements OnInit {
     show() {
       this.showform = true;
     }
-    remove(id: string) {
-      this.cs.remove('courses', id);
-    }
-
-    addCourse(courseid: string, uid: string) {
-      this.cs.createWithJustId(`users/${this.useruid}/mycourses`, courseid );
-    }
-
-    // customclaims() {
-    //   return this.as.customclaims;
-    // }
-
+ 
 }

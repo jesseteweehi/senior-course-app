@@ -53,8 +53,9 @@
 </div>
 
 <div *ngIf="standardsJoined$ | async; let standardsJoined$ ">
-    <h2 class="mat-h1">Credits Total: {{ standardsJoined$ | filter :'result': selected | credit : 'credits'}}</h2>
-    
+    <div id="rcorners1">
+      <h1 class="mat-h1">Credits Total: {{ standardsJoined$ | filter :'result': selected | credit : 'credits'}}</h1>
+    </div>
       <mat-accordion>
         <mat-expansion-panel class="card-1" *ngFor="let standard of standardsJoined$ | filter :'result': selected">
           <mat-expansion-panel-header collapsedHeight="80px">

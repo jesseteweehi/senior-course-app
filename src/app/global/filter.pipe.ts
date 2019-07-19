@@ -10,7 +10,7 @@ export class FilterPipe implements PipeTransform {
     if (query === 'null') {
       return standards;
     } else if (query === 'attained') {
-      return standards.filter(obj => obj.result ===  'Achieved' || 
+      return standards.filter(obj => obj.result ===  'Achieved' ||
         obj.result === 'Achieved with Merit' || obj.result === 'Achieved with Excellence');
     } else {
       return standards.filter(obj => obj[property] === query);
